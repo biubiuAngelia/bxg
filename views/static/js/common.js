@@ -15,5 +15,40 @@ define(["jquery", "template", "cookie"], function($, template) {
             var html = template("userinfo-tpl", userInfo);
             $("#profile").html(html);
         }
+
+        //退出
+        $("#logoutbtn").click(function() {
+            $.ajax({
+                url: "/api/logout",
+                type: "post",
+                success: function(data) {
+                    if (data.code == 200) {
+                        location.href = "/dashboard/login";
+                    }
+                }
+            })
+        })
+
+        //侧边栏点击下拉列表显示
+        $(".navs>ul>li>ul").parent().click(function() {
+            $(this).children("ul").slideDown();
+        })
+
+        //当前li高亮
+        var path = location.pathname;
+        if (path == "/") {
+            path = "/dashboard/index";
+        }
+        var activeLi = $(".navs a[href='" + path + "']");
+        activeLi.addClass("active");
+        //判断当前菜单是否是一个二级菜单项，如果是，就让二级菜单打开
+        var activeUl = activeLi.parent().parent();
+        if (activeUl.siblings("a").length == 1) {
+            activeUl.slideDown();
+        }
+
+        //给查看注册事件
+
+
     });
 })
