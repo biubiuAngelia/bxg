@@ -1,7 +1,18 @@
-define(["jquery", "template", "cookie"], function($, template) {
+define(["jquery", "template", "nprogress", "cookie"], function($, template, NProgress) {
     $(function() {
+        // Nprogress.start();
+        // Nprogress.done();
         //判断用户当前在哪个页面
         //如果不在登录页面才执行下面的这段代码
+        //注册ajax全局事件来控制进度条的显示和结束
+        $(document).ajaxStart(function() {
+            NProgress.start();
+        })
+
+        $(document).ajaxStop(function() {
+            NProgress.done();
+        })
+
         if (location.pathname != "/dashboard/login") {
 
             //判断用户到底登录还是没登录
@@ -13,7 +24,7 @@ define(["jquery", "template", "cookie"], function($, template) {
             //获取cookie中存储的用户信息，使用模板渲染
             var userInfo = JSON.parse($.cookie("userInfo"));
             var html = template("userinfo-tpl", userInfo);
-            $("#profile").html(html);
+            $("#pic").html(html);
         }
 
         //退出

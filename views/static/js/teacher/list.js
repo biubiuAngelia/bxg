@@ -3,7 +3,6 @@ define(["jquery", "template", "bootstrap"], function($, template) {
         url: "/api/teacher",
         type: "get",
         success: function(data) {
-            console.log(data);
             template.defaults.imports.getage = function(birthday) {
                 var now = new Date();
                 birthday = new Date(birthday);
@@ -24,7 +23,6 @@ define(["jquery", "template", "bootstrap"], function($, template) {
                 tc_id: tc_id
             },
             success: function(data) {
-                console.log(data);
                 if (data.code == 200) {
                     var html = template("teacherinfoTpl", data.result);
                     $("#teacherinfo").html(html);

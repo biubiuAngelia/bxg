@@ -29,21 +29,40 @@
             <li class="active">{{title}}</li>
         </ol>
         <div class="teacher-add">
-            <form action="{{url}}" method="post" class="form-horizontal col-xs-offset-2">
+            <form id="teacherform" action="{{url}}" method="post" class="form-horizontal col-xs-offset-2">
+                <input type="hidden" name="tc_id" value="{{tc_id}}">
                 <div class="form-group">
                     <label class="col-xs-3 control-label">姓名</label>
                     <div class="col-xs-4">
-                        <input type="text" value="{{tc_name}}" class="form-control input-sm" placeholder="讲师名称">
+                        <input type="text" name="tc_name" value="{{tc_name}}" data-required data-trim class="form-control input-sm" placeholder="讲师名称">
                     </div>
                 </div>
                 {{if !tc_id}}
                 <div class="form-group">
                     <label class="col-xs-3 control-label">密码</label>
                     <div class="col-xs-4">
-                        <input type="password" class="form-control input-sm">
+                        <input type="password" name="tc_pass" data-pattern="^[a-z0-9]{6,18}$" class="form-control input-sm">
                     </div>
                 </div>
                 {{/if}}
+                <div class="form-group">
+                    <label class="col-xs-3 control-label">电话号码</label>
+                    <div class="col-xs-4">
+                        <input type="text" name="tc_cellphone" class="form-control input-sm">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-xs-3 control-label">昵称</label>
+                    <div class="col-xs-4">
+                        <input type="text" name="tc_roster" class="form-control input-sm">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-xs-3 control-label">年龄</label>
+                    <div class="col-xs-4">
+                        <input type="text" name="tc_birthday" class="form-control input-sm">
+                    </div>
+                </div>
                 <div class="form-group">
                     <label class="col-xs-3 control-label">入职时间</label>
                     <div class="col-xs-4">
@@ -53,7 +72,7 @@
                 <div class="form-group">
                     <label class="col-xs-3 control-label">类型</label>
                     <div class="col-xs-2">
-                        <select name="" class="form-control input-sm">
+                        <select name="tc_type" class="form-control input-sm">
                                     <option value="1" {{if tc_type=="1"}}selected{{/if}}>讲师</option>
                             <option value="0" {{if tc_type=="0"}}selected{{/if}}>管理员</option>
                                 </select>
@@ -72,7 +91,7 @@
                 </div>
                 <div class="form-group">
                     <div class="col-xs-7">
-                        <a href="/teacher/list" class="btn btn-success btn-sm pull-right">{{btnText}} </a>
+                        <button class="btn btn-success btn-sm pull-right">{{btnText}} </button>
                     </div>
                 </div>
             </form>
